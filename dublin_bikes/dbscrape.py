@@ -17,15 +17,16 @@ start_time = datetime.datetime.now()
 #file_name = today + ".txt"
 file_name = "dbscraper_sleep.txt"
 
-#Scrape 1440 times, every 10 minutes = 10 days 
+#Scrape 2880 times, every 5 minutes = 10 days 
 count = 0
-while count < 1440:
+while count < 2880:
 	output = open(file_name, "a")
 	webpage = urlopen(address).read()
 	webpage = re.sub( r'<[^>]*>', ' ', webpage ).strip() #strip tags
 	output.write(webpage)
 	count += 1
+	start_time = datetime.datetime.now()
 	print ('Process #'), count, ('Time:'), start_time
-	time.sleep(600)
+	time.sleep(300)
 
 print ("Scraping finished.")

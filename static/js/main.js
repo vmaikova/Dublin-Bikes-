@@ -12,35 +12,12 @@ $(document).ready(
         });   
         initializeMap();
     });
-    // var getJSON = function(url, callback) {
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.open('GET', url, true);
-    //     xhr.responseType = 'json';
-    //     xhr.onload = function() {
-    //         var status = xhr.status;
-    //         if (status === 200) {
-    //             callback(null, xhr.response);
-    //         } else {
-    //             callback(status, xhr.response);
-    //         }
-    //     };
-    //     xhr.send();
-    // };
 
-    // getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=6e5370c5f5f18f19d1bd95ba3279ace3208759ab',
-    //     function(err, data) {
-    //         if (err !== null) {
-    //             console.log('error')
-    //         } else {
-    //             console.log('sucess', data)
-    //             setLocations(data)
-    //         }
-    //     });
 function initializeMap()
 {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13.1,
-        center: new google.maps.LatLng(53.3485, -6.2703),
+        center: new google.maps.LatLng(53.3475, -6.2703),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
@@ -80,13 +57,6 @@ function initializeMap()
         }
         addMarkersToTheMap();
     }
-    // var map = new google.maps.Map(document.getElementById('map'), {
-    //     zoom: 13.3,
-    //     center: new google.maps.LatLng(53.3498, -6.2703),
-    //     mapTypeId: google.maps.MapTypeId.ROADMAP
-    // });
-
-    // var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
 

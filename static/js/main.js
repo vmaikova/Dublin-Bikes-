@@ -13,6 +13,8 @@ $(document).ready(
         initializeMap();
     });
 
+<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
+
 function initializeMap()
 {
     var map = new google.maps.Map(document.getElementById('map'), {

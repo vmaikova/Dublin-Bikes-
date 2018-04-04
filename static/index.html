@@ -15,65 +15,65 @@
         <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+        <!--Vik-->
+        <title> Dublin Bikes</title>
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <!--Vik-->
     </head>
+    
     <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Software Engineering Group Project</a>
-        </div>
-          <div class="dropdown show">
-			  <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Dropdown link
-			  </a>
-			
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			    <a class="dropdown-item" href="#">Action</a>
-			    <a class="dropdown-item" href="#">Another action</a>
-			    <a class="dropdown-item" href="#">Something else here</a>
-			  </div>
-			</div>
-      </div>
-    </nav>
-    <div class="alert alert-success" role="alert" id="alertDisplay">
-        
-    </div>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Dublin Bikes</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+        <nav id="mainNav"> <!--class="navbar navbar-inverse navbar-fixed-top" role="navigation"-->
+                <div class="navbar navbar-light bg-light">
+                  <div class="row">
+                      <div class="col-sm-3"><div class="logo"></div><a href="index.html"><img class="logo-file" src="https://upload.wikimedia.org/wikipedia/en/e/e8/Dublin_Bikes_logo.jpg"></a>
+                      </div>
+                      <div class="col-sm-6"  id="MainTitle"><h1>Dublin Bikes </h1></div>
+                  </div>
+                </div>
+        </nav>
 
 
-    <div class="container">
-      <!-- Example row of columns -->
+<!--Vik-->
+        <!-- <div class="container">
+            <div class="left-side">
+                <center>
+                    <h3>Station map</h3>
+                    <br>
+                    <p3>Use the map to find the station nearest to you!</p3><br><br> </center>
+                <div id="map" style="height: 60%; width: 90%;">
+                </div>
+            </div>
+            <div class="right-side">
+                <h3> <center> <p> Your search: </p> </center> </h3> 
+                <br>
+                <p3> <center> Please select a station on the map and click on more details to display additional information.</center> </p3> <br>
+                <p> dublinbikes stations are distributed throughout the city centre to enable easy access and optimal use. Located in close proximity to each other, every station has a minimum of 15 stands in situ making it easy to enjoy the service! </p>
+                <br>
+                <br> -->
+<!--Vik-->
+
+    <div class="container-fluid">
       <div class="row">
       
-        <div class="col-md-4">
-          <h2>Heading 2</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="col-md-7">
+          <h2 class="text-center">Station map</h2>
+          <p class="text-center">Use the map to find the station nearest to you! </p>
+          <div id="map">
+          </div>
         </div>
         
-        <div class="col-md-4">
-          <h2>Heading 2</h2>
-          <p>Hello world! </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="col-md-2">
+          <h2 class="text-center">Hidden view</h2>
+          <p class="text-center"> This section will be hidden initially </p>
        </div>
        
-        <div class="col-md-4">
-          <h2>Heading 2</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="col-md-3">
+          <h2 class="text-center">Weather</h2>
+          <p class="text-center">Please select a station on the map and click on more details to display additional information. </p> <br>
+          <p class="text-center"> dublinbikes stations are distributed throughout the city centre to enable easy access and optimal use. Located in
+             close proximity to each other, every station has a minimum of 15 stands in situ making it easy to enjoy the service! </p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@
 
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p>&copy; Software Engineering Group Project 2018</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

@@ -10,17 +10,27 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    #return app.send_static_file("index.html")#("/static/index.html")
     return send_from_directory("../static", "index.html")
-
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('../static/js', path)
 
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('../static/css', path)
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('../static/js', path)
+
+@app.route("/weather/hourly")
+def hourly_weather():
+    return send_from_directory('', 'hourly_weather.json')
+
+@app.route("/weather/forecast")
+def forecast():
+    return send_from_directory('', 'forecast.json')
+
+@app.route("/favicon.ico")
+def icon():
+    return send_from_directory('../static', 'favicon.ico')
 
 #if __name__ == "__main__":
 port = int(os.environ.get("PORT", 5000))

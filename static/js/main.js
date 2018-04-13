@@ -7,41 +7,40 @@ $(document).ready(
     });
 
 //<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
-    function getWeather() 
-    {
-        const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
-        $("#CityAndTime").html(`Dublin ${currentDate}`)
-<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max -->
+//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max -->
+function getWeather() 
+{
+    const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
+    $("#CityAndTime").html(`Dublin ${currentDate}`)
+    $.get("/weather/hourly", function(data, status){
 
-        $.get("/weather/hourly", function(data, status){
+        $("#weatherTemp").html(data["hourly_forecast"][0]["temp"]["metric"] + " Â°C");
+        $("#weatherImage").attr("src", data["hourly_forecast"][0]["icon_url"]);
+        $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " Â°C");
+        $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
+        $("#weatherHumidity").html("Humidity: " + data["hourly_forecast"][0]["humidity"] + " %");
+        $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
+        
+            for (i=2; i<5; i+=2)
+            {
+            $("#lowerPart").append(
+                `<hr> 
+                <div class = "row lessPadding">
+                    <div class="col-md-4">
+                    <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
+                    </div>
+                    <div class="col-md-4">
+                    <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
+                    </div>
+                    <div class="col-md-4">
+                    <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} Â°C</p>
+                    </div>
+                </div>`
+            ); 
 
-                $("#weatherTemp").html(data["hourly_forecast"][0]["temp"]["metric"] + " °C");
-                $("#weatherImage").attr("src", data["hourly_forecast"][0]["icon_url"]);
-                $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " °C");
-                $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
-                $("#weatherHumidity").html("Humidity: " + data["hourly_forecast"][0]["humidity"] + " %");
-                $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
-                
-                 for (i=2; i<5; i+=2)
-                 {
-                    $("#lowerPart").append(
-                        `<hr> 
-                        <div class = "row lessPadding">
-                          <div class="col-md-4">
-                          <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
-                          </div>
-                          <div class="col-md-4">
-                          <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
-                          </div>
-                          <div class="col-md-4">
-                          <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} °C</p>
-                          </div>
-                        </div>`
-                    ); 
-
-                 }
-        }); 
-    }
+            }
+    }); 
+}
 
 
 
@@ -98,12 +97,7 @@ function initializeMap()
 
                  contentStrings.push(contentString);
             }
-        });
-    function setLocations(data) {
-        for (var i = 0; i < data.length; i++) {
-            var location = [];
-            location.push(data[i].name, data[i].position.lat, data[i].position.lng, data[i].available_bikes, data[i].available_bike_stands, data[i].number, data[i].contract_name, data[i].banking, data[i].bonus, data[i].status)
-            locations.push(location)
+            addMarkersToTheMap();
         }
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -134,4 +128,3 @@ function initializeMap()
             }
         }
 }
-

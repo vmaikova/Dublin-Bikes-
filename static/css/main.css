@@ -43,3 +43,14 @@
         height: 40px;
         padding-top: 0px:
     }
+
+    .lessPadding {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+
+
+    #weatherImage {
+        float: right;
+    }

@@ -45,6 +45,16 @@
         padding-top: 0px:
     }
 
+    .lessPadding {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+
+
+    #weatherImage {
+        float: right;
+    }
     .margin-bottom-10 {
         margin-bottom: 10px;
     }

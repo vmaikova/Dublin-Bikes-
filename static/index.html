@@ -37,23 +37,42 @@
             <div class="col-md-5">
                 <h2 class="text-center">Station map</h2>
                 <p class="text-center">Use the map to find the station nearest to you! </p>
+                <select class="margin-bottom-10 form-control" onchange="displayMoreInfo(this.value)">
+                </select>
                 <div id="map">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <h2 class="text-center">Hidden view</h2>
                 <p class="text-center"> This section will be hidden initially </p>
-                <select class="margin-bottom-10" onchange="displayMoreInfo(this.value)">
-                </select>
-                <div>Station number: <span class="station-number font-weight-bold"></span></div>
-                <div>Station name: <span class="station-name text-lowercase font-weight-bold"></span></div>
-                <div>Address: <span class="address font-weight-bold"></span></div>
-                <div>Bikes available: <span class="bikes-available font-weight-bold"></span></div>
-                <div>Free stands: <span class="free-stands font-weight-bold"></span></div>
-                <div>Capacity: <span class="capacity font-weight-bold"></span></div>
-                <div>Card payments: <span class="card-payments font-weight-bold"></span></div>
+                <div class="table-responsive hide-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Station name:</th>
+                                <th>Address:</th>
+                                <th>Bikes available:</th>
+                                <th>Free stands:</th>
+                                <th>Capacity:</th>
+                                <th>Card payments:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="active">
+                                <td class="active station-number"></td>
+                                <td class="success station-name"></td>
+                                <td class="warning address"></td>
+                                <td class="danger bikes-available"></td>
+                                <td class="info free-stands"></td>
+                                <td class="active capacity"></td>
+                                <td class="success card-payments"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h2 class="text-center">Weather</h2>
                 <p class="text-center">Please select a station on the map and click on more details to display additional information. </p>
                 <br>

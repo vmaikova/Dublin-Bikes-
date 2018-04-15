@@ -48,3 +48,6 @@
     .margin-bottom-10 {
         margin-bottom: 10px;
     }
+    .hide-table{
+        display: none;
+    }

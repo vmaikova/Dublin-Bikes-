@@ -8,12 +8,11 @@ import urllib.request
 
 def get_json_from_url (url, filename):
     urllib.request.urlretrieve(url, filename)
-    
-get_json_from_url('http://api.wunderground.com/api/74d4737442833c9a/hourly/q/IE/Dublin.json', 'hourly_weather.json')
-
-get_json_from_url('http://api.wunderground.com/api/74d4737442833c9a/forecast10day/q/IE/Dublin.json', 'forecast.json')
 
 
+def updateWeather():
+    get_json_from_url('http://api.wunderground.com/api/74d4737442833c9a/hourly/q/IE/Dublin.json', 'hourly_weather.json')
     
+updateWeather()
     
-    
+print ('finished')  

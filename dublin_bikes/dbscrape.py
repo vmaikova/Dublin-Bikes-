@@ -1,6 +1,7 @@
 from urllib import urlopen
 import datetime, time
 import re
+from dublin_bikes.weather import updateWeather
 
 print ("Starting...")
 
@@ -20,6 +21,7 @@ file_name = "dbscraper_sleep.txt"
 #Scrape 1440 times, every 10 minutes = 10 days 
 count = 0
 while count < 1440:
+	updateWeather()
 	output = open(file_name, "a")
 	webpage = urlopen(address).read()
 	webpage = re.sub( r'<[^>]*>', ' ', webpage ).strip() #strip tags

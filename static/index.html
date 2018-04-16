@@ -1,61 +1,87 @@
 <!doctype html>
 <html>
-	<head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <!-- Reference from https://stackoverflow.com/questions/9943771/adding-a-favicon-to-a-static-html-page -->
-        <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Reference from https://stackoverflow.com/questions/9943771/adding-a-favicon-to-a-static-html-page -->
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <title> Dublin Bikes</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+</head>
+        <!--Icon reference: https://en.wikipedia.org/wiki/Dublinbikes-->
 
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
-        <title> Dublin Bikes</title>
-        <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-    </head>
-    
-    <body>
-        <nav id="mainNav"> <!--class="navbar navbar-inverse navbar-fixed-top" role="navigation"-->
-                <div class="navbar navbar-light bg-light">
-                  <div class="row">
-                      <div class="col-sm-3"><div class="logo"></div><a href="index.html"><img class="logo-file" src="https://upload.wikimedia.org/wikipedia/en/e/e8/Dublin_Bikes_logo.jpg"></a>
-                      </div>
-                      <div class="col-sm-6"  id="MainTitle"><h1>Dublin Bikes </h1></div>
-                  </div>
+<body>
+    <nav id="mainNav">
+        <!--class="navbar navbar-inverse navbar-fixed-top" role="navigation"-->
+        <div class="navbar navbar-light bg-light">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="logo"></div><a href="index.html"><img class="logo-file" src="https://upload.wikimedia.org/wikipedia/en/e/e8/Dublin_Bikes_logo.jpg"></a>
                 </div>
-        </nav>
-
-
+                <div class="col-sm-6" id="MainTitle">
+                    <h1>Dublin Bikes </h1></div>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid">
-      <div class="row">
+        <div class="row">
+            <div class="col-md-5">
+                <h2 class="text-center">Station map</h2>
+                <p class="text-center">Use the map to find the station nearest to you! </p>
+                <div id="map">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Hidden view</h2>
+                <p class="text-center"> This section will be hidden initially </p>
+                <select class="margin-bottom-10" onchange="displayMoreInfo(this.value)">
+                </select>
+                <div>Station number: <span class="station-number font-weight-bold"></span></div>
+                <div>Station name: <span class="station-name text-lowercase font-weight-bold"></span></div>
+                <div>Address: <span class="address font-weight-bold"></span></div>
+                <div>Bikes available: <span class="bikes-available font-weight-bold"></span></div>
+                <div>Free stands: <span class="free-stands font-weight-bold"></span></div>
+                <div>Capacity: <span class="capacity font-weight-bold"></span></div>
+                <div>Card payments: <span class="card-payments font-weight-bold"></span></div>
+            </div>
+            
+            <div class="col-md-3">
+                <h2 class="text-center">Weather</h2>
+                    <div id = "weather" class="container">
+                      <div id = "upperPart">
+                        <h3 id = "CityAndTime" style="text-align:center"> </h3>
+                        <image id = "weatherImage" src = "http://icons.wxug.com/i/c/k/nt_mostlycloudy.gif"> </image>
+                        <h4 id = "weatherTemp"></h4>
+                        <h5 id = "weatherFeelsLike"></h5>
+                        <h5 id = "weatherDescription"></h5>
+                        <h5 id = "weatherHumidity"></h5>
+                        <h5 id = "weatherWind"></h5>
+                        
+                        
+                      </div>
+              
+                      <div id = "lowerPart" class="container">
       
-        <div class="col-md-7">
-          <h2 class="text-center">Station map</h2>
-          <p class="text-center">Use the map to find the station nearest to you! </p>
-          <div id="map"> 
-          </div>
+                    </div>
+                  </div>
+            </div>
         </div>
         
-        <div class="col-md-2">
-          <h2 class="text-center">Hidden view</h2>
-          <p class="text-center"> This section will be hidden initially </p>
-       </div>
        
-        <div class="col-md-3">
-          <h2 class="text-center">Weather</h2>
-          <p class="text-center">Please select a station on the map and click on more details to display additional information. </p> <br>
-          <p class="text-center"> dublinbikes stations are distributed throughout the city centre to enable easy access and optimal use. Located in
-             close proximity to each other, every station has a minimum of 15 stands in situ making it easy to enjoy the service! </p>
-        </div>
-      </div>
+        
 
+
+      
 
       <hr>
 
@@ -64,13 +90,17 @@
         <p>&copy; Software Engineering Group Project 2018</p>
       </footer>
     </div>      
+        <hr>
+        <footer>
+            <p>&copy; Software Engineering Group Project 2018</p>
+        </footer>
+    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
 </html>
-
-
-
-

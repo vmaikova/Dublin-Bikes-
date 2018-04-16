@@ -1,31 +1,61 @@
+var locations = [];
+var contentStrings = [];
+
 // Reference from https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
 $(document).ready(
     function(){
-        $.get("/weather/hourly", function(data, status){
-            console.log(data);
-            for (i=0; i<10; i+=2)
-            {
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["hour"]);
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["year"]);
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["year"]);
-            }
-        });   
         initializeMap();
+        getWeather ();
+
     });
 
-<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
+//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
+//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max -->
+function getWeather() 
+{
+    const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
+    $("#CityAndTime").html(`Dublin ${currentDate}`)
+    $.get("/weather/hourly", function(data, status){
+
+        $("#weatherTemp").html(data["hourly_forecast"][0]["temp"]["metric"] + " &#8451;");
+        $("#weatherImage").attr("src", data["hourly_forecast"][0]["icon_url"]);
+        $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " &#8451;");
+        $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
+        $("#weatherHumidity").html("Humidity: " + data["hourly_forecast"][0]["humidity"] + " %");
+        $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
+        
+            for (i=2; i<5; i+=2)
+            {
+            $("#lowerPart").append(
+                `<hr> 
+                <div class = "row lessPadding">
+                    <div class="col-md-4">
+                    <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
+                    </div>
+                    <div class="col-md-4">
+                    <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
+                    </div>
+                    <div class="col-md-4">
+                    <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} &#8451;</p>
+                    </div>
+                </div>`
+            ); 
+
+            }
+    }); 
+}
+
+
+
+
+
+// Reference from https://developers.google.com/maps/documentation/javascript/examples/marker-simple
 
 function initializeMap()
 {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13.1,
-        center: new google.maps.LatLng(53.3475, -6.2703),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
+   var locations = [];
+        var contentStrings = [];
 
-    var infowindow = new google.maps.InfoWindow();
-
-    var locations = [];
     var getJSON = function(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -46,19 +76,37 @@ function initializeMap()
             if (err !== null) {
                 console.log('error')
             } else {
-                console.log('sucess', data)
-                setLocations(data)
+                console.log('sucess')
+                setLocations(data);
+                generateDropdown();
             }
         });
+
+
     function setLocations(data) {
         for (var i = 0; i < data.length; i++) {
             var location = [];
-            location.push(data[i].name, data[i].position.lat, data[i].position.lng, data[i].available_bikes, data[i].available_bike_stands, data[i].number, data[i].contract_name, data[i].banking, data[i].bonus, data[i].status)
-            console.log(location, 'location')
-            locations.push(location)
+            location.push(data[i].name, data[i].position.lat, data[i].position.lng, data[i].available_bikes, data[i].available_bike_stands, data[i].number,
+                data[i].contract_name, data[i].banking, data[i].bonus, data[i].status, data[i].number, data[i].address, data[i].bike_stands)
+            locations.push(location);
+            var contentString = '<div>' + locations[i][0] + '<ul>' +
+                '<li>Number of available bikes: ' + locations[i][3] + '</li>' +
+                '<li>Number of free stands: ' + locations[i][12] + '</li>' +
+                '<p class="text-primary" onclick="displayMoreInfo(' + i + ')">more info</p>'
+            '</ul>' + '</div>';
+
+            contentStrings.push(contentString);
         }
         addMarkersToTheMap();
     }
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12.8,
+        center: new google.maps.LatLng(53.3498, -6.2703),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
 
@@ -70,23 +118,44 @@ function initializeMap()
                 map: map
             });
 
-            var contentString = '<div>' + locations[i][0] + '<ul>' +
-                '<li>Number of available bikes: ' + locations[i][3] + '</li>' +
-                '<li>Number of available bikes stands: ' + locations[i][4] + '</li>' +
-                '<li>Number: ' + locations[i][5] + '</li>' +
-                '<li>Contact name: ' + locations[i][6] + '</li>' +
-                '<li>Banking: ' + locations[i][7] + '</li>' +
-                '<li>Bonus: ' + locations[i][8] + '</li>' +
-                '<li>Status: ' + locations[i][9] + '</li>' +
-                '</ul>' + '</div>';
-
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(locations[i][0]);
-                    //infowindow.setContent(contentString[i]);
+                    clearDOM();
+                    infowindow.setContent(contentStrings[i]);
                     infowindow.open(map, marker);
                 }
-            })(marker, i));            
+            })(marker, i));
+
         }
+    }
+}
+
+function displayMoreInfo(id) {
+    document.getElementsByClassName("station-number")[0].innerHTML = locations[id][10];
+    document.getElementsByClassName("station-name")[0].innerHTML = locations[id][0];
+    document.getElementsByClassName("address")[0].innerHTML = locations[id][11];
+    document.getElementsByClassName("bikes-available")[0].innerHTML = locations[id][4];
+    document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][5];
+    document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
+    locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML ='No';
+}
+
+function clearDOM() {
+    document.getElementsByClassName("station-number")[0].innerHTML = '';
+    document.getElementsByClassName("station-name")[0].innerHTML ='';
+    document.getElementsByClassName("address")[0].innerHTML = '';
+    document.getElementsByClassName("bikes-available")[0].innerHTML ='';
+    document.getElementsByClassName("free-stands")[0].innerHTML ='';
+    document.getElementsByClassName("capacity")[0].innerHTML = '';
+    document.getElementsByClassName("card-payments")[0].innerHTML = '';
+}
+
+function generateDropdown(){
+    for (var i = 0; i < locations.length; i++) {
+        var option = document.createElement("option"); 
+        option.setAttribute("value", i);
+        option.innerHTML = locations[i][0];
+        var select = document.getElementsByTagName("select")[0];
+        select.appendChild(option)
     }
 }

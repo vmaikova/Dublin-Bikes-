@@ -131,6 +131,7 @@ function initializeMap()
 }
 
 function displayMoreInfo(id) {
+    showTable();
     document.getElementsByClassName("station-number")[0].innerHTML = locations[id][10];
     document.getElementsByClassName("station-name")[0].innerHTML = locations[id][0];
     document.getElementsByClassName("address")[0].innerHTML = locations[id][11];
@@ -158,4 +159,8 @@ function generateDropdown(){
         var select = document.getElementsByTagName("select")[0];
         select.appendChild(option)
     }
+}
+
+function showTable() {
+    document.getElementsByClassName("hide-table")[0].style.display = 'block';
 }

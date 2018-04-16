@@ -3,22 +3,58 @@ var contentStrings = [];
 
 // Reference from https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
 $(document).ready(
-    function() {
-        $.get("/weather/hourly", function(data, status) {
-            console.log(data);
-            for (i = 0; i < 10; i += 2) {
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["hour"]);
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["year"]);
-                $("#alertDisplay").append(data["hourly_forecast"][i]["FCTTIME"]["year"]);
-            }
-        });
+    function(){
         initializeMap();
+        getWeather ();
+
     });
 
-<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
-<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple -->
+//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
+//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max -->
+function getWeather() 
+{
+    const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
+    $("#CityAndTime").html(`Dublin ${currentDate}`)
+    $.get("/weather/hourly", function(data, status){
 
-function initializeMap() {
+        $("#weatherTemp").html(data["hourly_forecast"][0]["temp"]["metric"] + " &#8451;");
+        $("#weatherImage").attr("src", data["hourly_forecast"][0]["icon_url"]);
+        $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " &#8451;");
+        $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
+        $("#weatherHumidity").html("Humidity: " + data["hourly_forecast"][0]["humidity"] + " %");
+        $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
+        
+            for (i=2; i<5; i+=2)
+            {
+            $("#lowerPart").append(
+                `<hr> 
+                <div class = "row lessPadding">
+                    <div class="col-md-4">
+                    <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
+                    </div>
+                    <div class="col-md-4">
+                    <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
+                    </div>
+                    <div class="col-md-4">
+                    <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} &#8451;</p>
+                    </div>
+                </div>`
+            ); 
+
+            }
+    }); 
+}
+
+
+
+
+
+// Reference from https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+
+function initializeMap()
+{
+   var locations = [];
+        var contentStrings = [];
 
     var getJSON = function(url, callback) {
         var xhr = new XMLHttpRequest();

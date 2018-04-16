@@ -43,12 +43,12 @@
                 <div id="map">
                 </div>
             </div>
-            <div class="col-md-5">
+            <div id = "hiddenView" class="col-md-4">
                 <h2 class="text-center">Hidden view</h2>
                 <p class="text-center"> This section will be hidden initially </p>
                 <div class="table-responsive hide-table">
                     <table class="table">
-                        <thead>
+                        <!-- <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Station name:</th>
@@ -58,22 +58,41 @@
                                 <th>Capacity:</th>
                                 <th>Card payments:</th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <tbody>
                             <tr class="active">
-                                <td class="active station-number"></td>
-                                <td class="success station-name"></td>
-                                <td class="warning address"></td>
-                                <td class="danger bikes-available"></td>
-                                <td class="info free-stands"></td>
-                                <td class="active capacity"></td>
+                                <td> # </td>
+                                <td class="station-number"></td>
+                            </tr>
+                            <tr class="success">
+                                <td> Station Name: </td>
+                                <td class=" station-name"></td>
+                            </tr>
+                            <tr class="warning">
+                                <td> Address: </td>
+                                <td class="address"></td>
+                            </tr>    
+                            <tr class="danger">
+                                <td> Bikes available: </td>
+                                <td class="bikes-available"></td>
+                            </tr>
+                            <tr class="info">
+                                <td> Free stands: </td>   
+                                <td class="free-stands"></td>
+                            </tr>
+                            <tr class="active"> 
+                               <td> Capacity: </td>   
+                                <td class="capacity"></td>
+                            </tr>
+                            <tr class="success">
+                                <td> Card payments: </td>  
                                 <td class="success card-payments"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <h2 class="text-center">Weather</h2>
                     <div id = "weather" class="container">
                       <div id = "upperPart">
@@ -96,17 +115,7 @@
         </div>
         
        
-        
 
-
-      
-
-      <hr>
-
-
-      <footer>
-        <p>&copy; Software Engineering Group Project 2018</p>
-      </footer>
     </div>      
         <hr>
         <footer>

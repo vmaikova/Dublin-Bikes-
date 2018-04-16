@@ -92,7 +92,7 @@ function initializeMap()
             var contentString = '<div>' + locations[i][0] + '<ul>' +
                 '<li>Number of available bikes: ' + locations[i][3] + '</li>' +
                 '<li>Number of free stands: ' + locations[i][12] + '</li>' +
-                '<p class="text-primary" onclick="displayMoreInfo(' + i + ')">more info</p>'
+                '<p class="text-primary" onclick="displayMoreInfo(' + i + ')"> More info</p>'
             '</ul>' + '</div>';
 
             contentStrings.push(contentString);
@@ -139,6 +139,7 @@ function displayMoreInfo(id) {
     document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][5];
     document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
     locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML ='No';
+    $('#hiddenView').show('slow');
 }
 
 function clearDOM() {
@@ -164,3 +165,4 @@ function generateDropdown(){
 function showTable() {
     document.getElementsByClassName("hide-table")[0].style.display = 'block';
 }
+

@@ -18,7 +18,6 @@
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 </head>
-        <!--Icon reference: https://en.wikipedia.org/wiki/Dublinbikes-->
 
 <body>
     <nav id="mainNav">
@@ -43,12 +42,12 @@
                 <div id="map">
                 </div>
             </div>
-            <div id = "hiddenView" class="col-md-4">
+            <div class="col-md-5">
                 <h2 class="text-center">Hidden view</h2>
                 <p class="text-center"> This section will be hidden initially </p>
                 <div class="table-responsive hide-table">
                     <table class="table">
-                        <!-- <thead>
+                        <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Station name:</th>
@@ -58,65 +57,28 @@
                                 <th>Capacity:</th>
                                 <th>Card payments:</th>
                             </tr>
-                        </thead> -->
+                        </thead>
                         <tbody>
                             <tr class="active">
-                                <td> # </td>
-                                <td class="station-number"></td>
-                            </tr>
-                            <tr class="success">
-                                <td> Station Name: </td>
-                                <td class=" station-name"></td>
-                            </tr>
-                            <tr class="warning">
-                                <td> Address: </td>
-                                <td class="address"></td>
-                            </tr>    
-                            <tr class="danger">
-                                <td> Bikes available: </td>
-                                <td class="bikes-available"></td>
-                            </tr>
-                            <tr class="info">
-                                <td> Free stands: </td>   
-                                <td class="free-stands"></td>
-                            </tr>
-                            <tr class="active"> 
-                               <td> Capacity: </td>   
-                                <td class="capacity"></td>
-                            </tr>
-                            <tr class="success">
-                                <td> Card payments: </td>  
+                                <td class="active station-number"></td>
+                                <td class="success station-name"></td>
+                                <td class="warning address"></td>
+                                <td class="danger bikes-available"></td>
+                                <td class="info free-stands"></td>
+                                <td class="active capacity"></td>
                                 <td class="success card-payments"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h2 class="text-center">Weather</h2>
-                    <div id = "weather" class="container">
-                      <div id = "upperPart">
-                        <h3 id = "CityAndTime" style="text-align:center"> </h3>
-                        <image id = "weatherImage" src = "http://icons.wxug.com/i/c/k/nt_mostlycloudy.gif"> </image>
-                        <h4 id = "weatherTemp"></h4>
-                        <h5 id = "weatherFeelsLike"></h5>
-                        <h5 id = "weatherDescription"></h5>
-                        <h5 id = "weatherHumidity"></h5>
-                        <h5 id = "weatherWind"></h5>
-                        
-                        
-                      </div>
-              
-                      <div id = "lowerPart" class="container">
-      
-                    </div>
-                  </div>
+                <p class="text-center">Please select a station on the map and click on more details to display additional information. </p>
+                <br>
+                <p class="text-center"> dublinbikes stations are distributed throughout the city centre to enable easy access and optimal use. Located in close proximity to each other, every station has a minimum of 15 stands in situ making it easy to enjoy the service! </p>
             </div>
         </div>
-        
-       
-
-    </div>      
         <hr>
         <footer>
             <p>&copy; Software Engineering Group Project 2018</p>

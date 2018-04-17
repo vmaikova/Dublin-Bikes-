@@ -42,27 +42,9 @@
         bottom: 0px;
         width: 100%;
         height: 40px;
-        padding-top: 0px;
+        padding-top: 0px:
     }
 
-    .lessPadding {
-        padding-bottom: 0px;
-        margin-bottom: 0px;
-    }
-
-
-    /* #hiddenView {
-        display: none;
-    } */
-
-
-    #hiddenView > div > table > tbody > tr > td { 
-        line-height: 4px;
-    }
-    
-    #weatherImage {
-        float: right;
-    }
     .margin-bottom-10 {
         margin-bottom: 10px;
     }

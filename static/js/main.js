@@ -2,15 +2,13 @@ var locations = [];
 var contentStrings = [];
 
 // Reference from https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
-$(document).ready(
-    function(){
+$(document).ready(function(){
         initializeMap();
         getWeather ();
-
     });
 
-//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/marker-simple -->
-//<!-- Ref https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max -->
+// Reference from https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+// Reference from https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max
 function getWeather() 
 {
     const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
@@ -26,24 +24,24 @@ function getWeather()
         
             for (i=2; i<5; i+=2)
             {
-            $("#lowerPart").append(
-                `<hr> 
-                <div class = "row lessPadding">
-                    <div class="col-md-4">
-                    <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
-                    </div>
-                    <div class="col-md-4">
-                    <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
-                    </div>
-                    <div class="col-md-4">
-                    <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} &#8451;</p>
-                    </div>
-                </div>`
-            ); 
-
+                $("#lowerPart").append(
+                    `<hr> 
+                    <div class = "row lessPadding">
+                        <div class="col-md-4">
+                        <p class="text-left">${data["hourly_forecast"][i]["FCTTIME"]["civil"]}</p>
+                        </div>
+                        <div class="col-md-4">
+                        <image id = "weatherImage" src = "${data["hourly_forecast"][i]["icon_url"]}"> </image>
+                        </div>
+                        <div class="col-md-4">
+                        <p class="text-right">${data["hourly_forecast"][i]["temp"]["metric"]} &#8451;</p>
+                        </div>
+                    </div>`
+                ); 
             }
-    }); 
+    });
 }
+
 
 
 
@@ -88,7 +86,7 @@ function initializeMap()
         for (var i = 0; i < data.length; i++) {
             var location = [];
             location.push(data[i].name, data[i].position.lat, data[i].position.lng, data[i].available_bikes, data[i].available_bike_stands, data[i].number,
-                data[i].contract_name, data[i].banking, data[i].bonus, data[i].status, data[i].number, data[i].address, data[i].bike_stands)
+                data[i].contract_name, data[i].banking, data[i].bonus, data[i].status, data[i].number, data[i].address, data[i].bike_stands, data[i].available_bikes)
             locations.push(location);
             var contentString = '<div>' + locations[i][0] + '<ul>' +
                 '<li>Number of available bikes: ' + locations[i][3] + '</li>' +
@@ -136,10 +134,10 @@ function displayMoreInfo(id) {
     showTable();
     document.getElementsByClassName("station-number")[0].innerHTML = locations[id][10];
     document.getElementsByClassName("address")[0].innerHTML = locations[id][11];
-    document.getElementsByClassName("bikes-available")[0].innerHTML = locations[id][4];
-    document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][5];
+    document.getElementsByClassName("bikes-available")[0].innerHTML = locations[id][13];
+    document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][4];
     document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
-    locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML ='No';
+    locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML = 'No';
 }
 
 function displayTable(){
@@ -158,7 +156,7 @@ function displayTable(){
 
 function generateDropdown(){
     for (var i = 0; i < locations.length; i++) {
-        var option = document.createElement("option"); 
+        var option = document.createElement("option");
         option.setAttribute("value", i);
         option.innerHTML = locations[i][0];
         var select = document.getElementsByTagName("select")[0];

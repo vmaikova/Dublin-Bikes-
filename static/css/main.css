@@ -45,6 +45,8 @@
         padding-top: 0px;
     }
 
+    #hiddenView {
+    }
     .lessPadding {
         padding-bottom: 0px;
         margin-bottom: 0px;
@@ -56,8 +58,8 @@
     }
 
 
-    #hiddenView > div > table > tbody > tr > td { 
-        line-height: 4px;
+    body > div > div > div.col-md-4 > div > table > tbody > tr > td{
+        padding: 2px;
     }
     
     #weatherImage {

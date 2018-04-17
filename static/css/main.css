@@ -51,9 +51,9 @@
     }
 
 
-    /* #hiddenView {
+    #hiddenView {
         display: none;
-    } */
+    }
 
 
     #hiddenView > div > table > tbody > tr > td { 
@@ -63,9 +63,11 @@
     #weatherImage {
         float: right;
     }
+
     .margin-bottom-10 {
         margin-bottom: 10px;
     }
+    
     .hide-table{
         display: none;
     }

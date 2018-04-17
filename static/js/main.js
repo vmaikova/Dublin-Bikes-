@@ -50,11 +50,12 @@ function getWeather()
 
 
 // Reference from https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+// Reference from https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
 
 function initializeMap()
 {
-   var locations = [];
-        var contentStrings = [];
+//    var locations = [];
+//         var contentStrings = [];
 
     var getJSON = function(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -76,7 +77,7 @@ function initializeMap()
             if (err !== null) {
                 console.log('error')
             } else {
-                console.log('sucess')
+                console.log('sucess', data)
                 setLocations(data);
                 generateDropdown();
             }
@@ -92,7 +93,7 @@ function initializeMap()
             var contentString = '<div>' + locations[i][0] + '<ul>' +
                 '<li>Number of available bikes: ' + locations[i][3] + '</li>' +
                 '<li>Number of free stands: ' + locations[i][12] + '</li>' +
-                '<p class="text-primary" onclick="displayMoreInfo(' + i + ')"> More info</p>'
+                '<p class="text-primary" onclick="displayMoreInfo(' + i + ')"> More info </p>'
             '</ul>' + '</div>';
 
             contentStrings.push(contentString);
@@ -115,12 +116,12 @@ function initializeMap()
 
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                map: map
+                map: map,
+                icon: getMarker(locations[i][13])
             });
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    clearDOM();
                     infowindow.setContent(contentStrings[i]);
                     infowindow.open(map, marker);
                 }
@@ -131,26 +132,29 @@ function initializeMap()
 }
 
 function displayMoreInfo(id) {
+    $('#hiddenView').show(400);
     showTable();
     document.getElementsByClassName("station-number")[0].innerHTML = locations[id][10];
-    document.getElementsByClassName("station-name")[0].innerHTML = locations[id][0];
     document.getElementsByClassName("address")[0].innerHTML = locations[id][11];
     document.getElementsByClassName("bikes-available")[0].innerHTML = locations[id][4];
     document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][5];
     document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
     locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML ='No';
-    $('#hiddenView').show('slow');
 }
 
-function clearDOM() {
-    document.getElementsByClassName("station-number")[0].innerHTML = '';
-    document.getElementsByClassName("station-name")[0].innerHTML ='';
-    document.getElementsByClassName("address")[0].innerHTML = '';
-    document.getElementsByClassName("bikes-available")[0].innerHTML ='';
-    document.getElementsByClassName("free-stands")[0].innerHTML ='';
-    document.getElementsByClassName("capacity")[0].innerHTML = '';
-    document.getElementsByClassName("card-payments")[0].innerHTML = '';
+function displayTable(){
+    
 }
+
+// function clearDOM() {
+//     document.getElementsByClassName("station-number")[0].innerHTML = '';
+//     document.getElementsByClassName("station-name")[0].innerHTML ='';
+//     document.getElementsByClassName("address")[0].innerHTML = '';
+//     document.getElementsByClassName("bikes-available")[0].innerHTML ='';
+//     document.getElementsByClassName("free-stands")[0].innerHTML ='';
+//     document.getElementsByClassName("capacity")[0].innerHTML = '';
+//     document.getElementsByClassName("card-payments")[0].innerHTML = '';
+// }
 
 function generateDropdown(){
     for (var i = 0; i < locations.length; i++) {
@@ -166,3 +170,12 @@ function showTable() {
     document.getElementsByClassName("hide-table")[0].style.display = 'block';
 }
 
+function getMarker(x) {
+    if (x > 10) {
+        return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    } else if (x >= 1 && x < 10) {
+        return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+    } else {
+        return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+    }
+}

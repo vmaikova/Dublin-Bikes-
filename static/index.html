@@ -36,15 +36,16 @@
         <div class="row">
             <div class="col-md-5">
                 <h2 class="text-center">Station map</h2>
-                <p class="text-center">Use the map to find the station nearest to you! </p>
+                <p class="text-center">Use the map or list below to find the station nearest to you! </p>
+                <p class="text-center"> A little tip : Green stations on the map have more than 10 bikes available, blue ones have less and orange stations are empty</p>
                 <select class="margin-bottom-10 form-control" onchange="displayMoreInfo(this.value)">
                 </select>
                 <div id="map">
                 </div>
             </div>
             <div id = "hiddenView" class="col-md-4">
-                <h2 class="text-center">Hidden view</h2>
-                <p class="text-center"> This section will be hidden initially </p>
+                <h2 class="text-center">Your search</h2>
+                <p class="text-center">Full information about your selected station as well as prediction graph to help you plan your journey! </p>
                 <div class="table-responsive hide-table">
                     <table class="table">
                         <tbody>
@@ -74,8 +75,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <div>
+    <a href="https://plot.ly/~sar2901/8/?share_key=kp7PcVjIvzS0izeOrAeS9D" target="_blank" title="1" style="display: block; text-align: center;"><img src="https://plot.ly/~sar2901/8.png?share_key=kp7PcVjIvzS0izeOrAeS9D" alt="1" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script src="https://plot.ly/embed.js" async></script>
+</div>
+                    
                 </div>
             </div>
+            
             <div class="col-md-3">
                 <h2 class="text-center">Weather</h2>
                     <div id = "weather" class="container">

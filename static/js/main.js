@@ -174,6 +174,6 @@ function getMarker(x) {
     } else if (x >= 1 && x < 10) {
         return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
     } else {
-        return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+        return 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
     }
 }

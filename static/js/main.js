@@ -9,17 +9,19 @@ $(document).ready(function(){
 
 // Reference from https://developers.google.com/maps/documentation/javascript/examples/marker-simple
 // Reference from https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple-max
+
+
 function getWeather() 
 {
-    const currentDate = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true }); 
-    $("#CityAndTime").html(`Dublin ${currentDate}`)
+    const date = (new Date().toLocaleDateString('en-IE', {day: 'numeric', month: 'long'}));
+    const currentDate = new Date().toLocaleTimeString('en-IE', {hour: '2-digit', minute: '2-digit', hour12: true }); 
+    $("#CityAndTime").html(`${date},  ${currentDate}`)
     $.get("/weather/hourly", function(data, status){
 
         $("#weatherTemp").html(data["hourly_forecast"][0]["temp"]["metric"] + " &#8451;");
         $("#weatherImage").attr("src", data["hourly_forecast"][0]["icon_url"]);
         $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " &#8451;");
         $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
-        $("#weatherHumidity").html("Humidity: " + data["hourly_forecast"][0]["humidity"] + " %");
         $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
         
             for (i=2; i<5; i+=2)
@@ -138,21 +140,12 @@ function displayMoreInfo(id) {
     document.getElementsByClassName("free-stands")[0].innerHTML = locations[id][4];
     document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
     locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML = 'No';
+    getGraph(locations[id][10]);
 }
 
-function displayTable(){
-    
+function getGraph(stationId) {
+   $("#graph").attr("src", '/graphing/ST' + stationId + '.png');
 }
-
-// function clearDOM() {
-//     document.getElementsByClassName("station-number")[0].innerHTML = '';
-//     document.getElementsByClassName("station-name")[0].innerHTML ='';
-//     document.getElementsByClassName("address")[0].innerHTML = '';
-//     document.getElementsByClassName("bikes-available")[0].innerHTML ='';
-//     document.getElementsByClassName("free-stands")[0].innerHTML ='';
-//     document.getElementsByClassName("capacity")[0].innerHTML = '';
-//     document.getElementsByClassName("card-payments")[0].innerHTML = '';
-// }
 
 function generateDropdown(){
     for (var i = 0; i < locations.length; i++) {
@@ -160,7 +153,7 @@ function generateDropdown(){
         option.setAttribute("value", i);
         option.innerHTML = locations[i][0];
         var select = document.getElementsByTagName("select")[0];
-        select.appendChild(option)
+        select.appendChild(option);
     }
 }
 

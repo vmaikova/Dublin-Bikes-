@@ -1,7 +1,6 @@
 
-from src import DataRetrieval
-from src.DataRetrieval import DataRetrieval
-
+import DataRetrieval
+from DataRetrieval import DataRetrieval
 import sqlite3
 import time
 import mysql.connector
@@ -9,10 +8,6 @@ import mysql.connector
 if __name__=='__main__':
     cnx = mysql.connector.Connect(user='root', password='password',host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com')
     c = cnx.cursor()
-    DB_NAME = 'bike_data'
-    #sql = 'CREATE DATABASE IF NOT EXISTS bike_data'
-    #c.execute(sql)
-    #DataRetrieval.create_Database()
     while True:
         # create DataRetrieval object
         dataObject = DataRetrieval() 

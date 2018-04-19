@@ -172,7 +172,7 @@ function getMarker(x) {
     if (x > 10) {
         return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
     } else if (x >= 1 && x < 10) {
-        return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+        return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     } else {
         return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
     }

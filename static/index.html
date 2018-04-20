@@ -34,7 +34,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-9" id="mapContainer">
                 <h3 class="text-center">Station map</h3>
                 <!--p class="text-center">Use the map to find the station nearest to you </p-->
                 <select class="margin-bottom-10 form-control" onchange="displayMoreInfo(this.value)">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div id = "hiddenView" class="col-md-4">
-                <h3 class="text-center"> Station Information </h3>
+                <h3 class="text-center"> Your Search </h3>
                 <div class="table-responsive hide-table">
                     <table class="table">
                         <tbody>
@@ -73,14 +73,13 @@
                             </tr>
                         </tbody>
                     </table>
-
+                    <h6 id = "middleText"> Average bike availability for: </h6>
                     <img id="graph" img src="" alt="Station average">
-
                 </div>
             </div>
             <div class="col-md-3">
                 <h3 class="text-center"> Dublin Weather </h3>
-                    <h4 id = "CityAndTime" style="text-align:center"> </h4>
+                    <h5 id = "CityAndTime" style="text-align:center"> </h5>
                     <div id = "weather" class="container">
                       <div id = "upperPart">
                         <image id = "weatherImage" src = "http://icons.wxug.com/i/c/k/nt_mostlycloudy.gif"> </image>
@@ -93,7 +92,16 @@
                       <div id = "lowerPart" class="container">
                     </div>
                   </div>
-                  <h4 id="bikesInFuture"></h4>
+                  <br>
+                    <h5 id= "predictionName"> Prediction for available bikes build on the weather forecast </h5>
+                    <table id = "prediction">
+                    <tr>
+                        <th> Time </th>
+                        <th class= "Row2"> Nr. of available bikes</th>
+                    </tr>
+                    <tr id="firstPrediction"></tr>
+                    <tr id="secondPrediction"></tr>
+                  </table>
             </div>
         </div>
  </div>      

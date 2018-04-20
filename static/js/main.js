@@ -144,6 +144,7 @@ function initializeMap()
 }
 
 function displayMoreInfo(id) {
+    minimizeMap();
     $('#hiddenView').show(400);
     showTable();
     document.getElementsByClassName("station-number")[0].innerHTML = locations[id][10];
@@ -156,18 +157,30 @@ function displayMoreInfo(id) {
     insertAvailableBikesForStation(locations[id][12]);
 }
 
+function minimizeMap()
+{
+    $("#mapContainer").removeClass('col-md-9')
+    $("#mapContainer").addClass('col-md-5')
+}
+
 function insertAvailableBikesForStation(capacity)
 {
+    $('#predictionName').show(400);
+    $('#prediction').show(400);
     currentDate = new Date();
-    currentDate.setHours(currentDate.getHours() + 2);
+    currentDate.setHours(currentDate.getHours() + 1);
     $.get("/prediction", { "dateTime": currentDate.toLocaleString(), "description": weatherData['description'], "rainBinary": weatherData['rainBinary'], "available_bike_stands": '31', "temperature":weatherData['temperature'] } )
         .done(function(data){
-            console.log(new Date().toLocaleDateString());
-            $("#bikesInFuture").html("Available bikes in 2 hours: " + data);
+            $("#firstPrediction").html(`<td>${currentDate.toLocaleTimeString('en-IE', {hour: '2-digit', minute: '2-digit', hour12: true })}</td> <td class = 'Row2'>${data}</td>`);
+            
+            currentDate.setHours(currentDate.getHours() + 1);
+            $.get("/prediction", { "dateTime": currentDate.toLocaleString(), "description": weatherData['description'], "rainBinary": weatherData['rainBinary'], "available_bike_stands": '31', "temperature":weatherData['temperature'] } )
+            .done(function(data){
+            $("#secondPrediction").html(`<td>${currentDate.toLocaleTimeString('en-IE', {hour: '2-digit', minute: '2-digit', hour12: true })}</td> <td class = 'Row2'>${data}</td>`);
+            }); 
         }); 
 }
 
-function displayTable(){
     
 function getGraph(stationId) {
    $("#graph").attr("src", '/graphing/ST' + stationId + '.png');

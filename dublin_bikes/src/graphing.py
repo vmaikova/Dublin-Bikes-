@@ -36,23 +36,13 @@ def createGraph(stationNumber):
 	data = [trace1,trace2]
 	layout = go.Layout(title=station+': '+name, width=800, height=640)
 	fig = go.Figure(data=data, layout=layout)
-	# Save image
 	py.image.save_as(fig, filename='/Users/sybilla/Documents/GitHub/DublinBikes/dublin_bikes/static/graphs/ST' + station + '.png')
-	
-	# ...Print stations for testing
-	#print(stationNumber)
-
-	#Used to open image file 
 	Image('ST'+station+'.png') 
 
 
-# Calls function for each station
-# 105 stations, no station 20
+# Calls function for each station number 1-105, no station 20
 for x in range(18,20):
 	createGraph(x)
 for x in range(21,23):
 	createGraph(x)
-
-# ...For Testing
-#createGraph(21)
 

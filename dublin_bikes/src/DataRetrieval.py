@@ -4,7 +4,6 @@ import json
 import sqlite3
 import datetime
 import mysql.connector
-from sqlalchemy import create_engine
 import os, shutil, datetime, sys
 import csv, json
 import codecs
@@ -13,11 +12,6 @@ from threading import Thread
 
 
 # Creates database on Amazon MySQL RDS if does not exist
-cnx = mysql.connector.Connect(user='root', password='password',host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com')
-c = cnx.cursor()
-sql = 'CREATE DATABASE IF NOT EXISTS bike_data'
-c.execute(sql)
-
 def create_Database():
     cnx = mysql.connector.Connect(user='root', password='password',host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com')
     c = cnx.cursor()
@@ -53,7 +47,6 @@ class DataRetrieval(object):
         cnx = mysql.connector.Connect(user='root', password='password',
                               host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com',
                               database='bike_data')
-        # initialise cursor for database
         c = cnx.cursor()
         c.execute('CREATE TABLE IF NOT EXISTS Bike_Occupancy (\
             Number INT(10), \
@@ -77,15 +70,12 @@ class DataRetrieval(object):
     def dataEntry(self, dataset): 
         value = dataset[0]['last_update']  
         res = datetime.datetime.fromtimestamp(value/1000).strftime('%Y-%m-%d %H:%M:%S')
-        
         for i in range(0,len(dataset)):
             dataset[i]['last_update'] = res
-        
-        # connect to database       
+               
         cnx = mysql.connector.Connect(user='root', password='password',
                               host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com',
                               database='bike_data')
-        # initialise cursor for database
         c = cnx.cursor()
         for record in dataset:
 
@@ -106,19 +96,16 @@ class DataRetrieval(object):
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',\
                 (Number, Name, Address, Latitude, Longitude, Banking, Bonus, Status, Bike_stands, Available_bike_stands, Available_bikes, Last_update))
             
-            #break
             
         cnx.commit()    
         c.close
         cnx.close()    
 
     # Function for querying Amazon MySQL RDS
-    def getAverageStationStatistics(self, stationNumber):
-        # connect to database       
+    def getAverageStationStatistics(self, stationNumber):       
         cnx = mysql.connector.Connect(user='root', password='password',
                               host='dublinbikes.camdjkja0k3a.us-east-1.rds.amazonaws.com',
                               database='bike_data')
-        # initialise cursor for database
         c = cnx.cursor()
         c.callproc('stations', [stationNumber])
         for (data) in c.stored_results():
@@ -128,12 +115,3 @@ class DataRetrieval(object):
         c.close
         cnx.close()  
 
-
-# ...For Testing
-#dr = DataRetrieval()
-#dr.getAverageStationStatistics(stationNumber)
-#dr.getAverageStationStatistics(1)
-#dataset = dr.makeRequest()
-#dr.saveToJSON(dataset)
-#dr.createTable()
-#dr.dataEntry(dr.getDatasetFromJSON('bikedata.json'))

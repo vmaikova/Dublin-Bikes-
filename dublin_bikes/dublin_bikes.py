@@ -33,6 +33,10 @@ def forecast():
 def icon():
     return send_from_directory('../static', 'favicon.ico')
 
+@app.route("/graphing/<path:path>")
+def graph(path):
+    return send_from_directory('../static/graphs', path)
+
 @app.route("/prediction")
 def predictAvailableBikes():
     dateTime = request.args.get('dateTime')

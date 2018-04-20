@@ -4,6 +4,11 @@
    ========================================================================== */
 
     
+   #mainNav > div {
+       margin-bottom: 5px;
+   }
+   
+   
     .container {
         width: 100%;
         display: table;
@@ -14,19 +19,25 @@
         background: white;
         margin-right: 7%;
         margin-left: 7%;
+        margin-top: 5px;
     }
     
     #mainNav {
         background: rgb(26, 80, 85);
         text-align: center;
         color: white;
-        margin-top: 20px;
+        margin-top: 0px;
     }
 
     #MainTitle{
         margin-top: 22px;
     }
     
+    #text-center {
+        font-weight: bold;
+    }
+
+
     #map{
         height: 25pc;
         position: static;
@@ -46,17 +57,12 @@
     }
 
     #hiddenView {
-    }
-    .lessPadding {
-        padding-bottom: 0px;
-        margin-bottom: 0px;
-    }
-
-
-    #hiddenView {
         display: none;
     }
 
+    #graph {
+       height: 305px;
+    }
 
     body > div > div > div.col-md-4 > div > table > tbody > tr > td{
         padding: 2px;
@@ -66,10 +72,57 @@
         float: right;
     }
 
+    #lowerPart > hr {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    #weather {
+        border-style: groove;
+    }
+
     .margin-bottom-10 {
         margin-bottom: 10px;
     }
     
-    .hide-table{
+    #hiddenView > div > table {
+        margin-bottom: 3px;
+    }
+
+    body > div > div > div.col-md-3 > hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        border-top: 0px;
+    }
+
+
+    #hiddenView > div {
+        text-align: center;
+    }
+
+    #middleText {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-weight: bold;
+    }
+
+    #CityAndTime {
+        margin-top: 0px;
+    }
+
+    #predictionName {
+        font-weight: bold;
         display: none;
+        text-align: center;
+    }
+
+    #prediction {
+        margin-top: 18px;
+        display: none;
+        width: 100%;
+    }
+
+
+    .Row2 {
+        text-align: center;
     }

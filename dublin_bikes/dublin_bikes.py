@@ -3,7 +3,8 @@
 """Main module."""
 
 import os 
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
+from prediction import predict
 #from flask.helpers import make_response
 
 app = Flask(__name__)
@@ -35,6 +36,16 @@ def icon():
 @app.route("/graphing/<path:path>")
 def graph(path):
     return send_from_directory('../static/graphs', path)
+
+@app.route("/prediction")
+def predictAvailableBikes():
+    dateTime = request.args.get('dateTime')
+    description = request.args.get('description')
+    rainBinary = request.args.get('rainBinary')
+    available_bike_stands = request.args.get('available_bike_stands')
+    temperature = request.args.get('temperature')
+    result = predict(dateTime, description, rainBinary, available_bike_stands, temperature)
+    return str(result)
 
 #if __name__ == "__main__":
 port = int(os.environ.get("PORT", 5000))

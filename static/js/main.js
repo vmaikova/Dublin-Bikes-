@@ -1,5 +1,6 @@
 var locations = [];
 var contentStrings = [];
+var weatherData;
 
 // Reference from https://www.w3schools.com/jquery/jquery_ajax_get_post.asp
 $(document).ready(function(){
@@ -23,7 +24,16 @@ function getWeather()
         $("#weatherFeelsLike").html(" Feels like: " + data["hourly_forecast"][0]["feelslike"]["metric"] + " &#8451;");
         $("#weatherDescription").html(data["hourly_forecast"][0]["condition"]);
         $("#weatherWind").html("Wind: " + data["hourly_forecast"][0]["wspd"]["metric"] + " km/h");
-        
+        let rainBinary = 0;
+        if(data["hourly_forecast"][0]["condition"] == 'Rain' )
+        {
+            rainBinary = 1;
+        }
+        weatherData = {
+            "description": data["hourly_forecast"][0]["condition"], 
+            "rainBinary": rainBinary ,  
+            "temperature":data["hourly_forecast"][0]["temp"]["metric"]
+        }
             for (i=2; i<5; i+=2)
             {
                 $("#lowerPart").append(
@@ -42,6 +52,8 @@ function getWeather()
                 ); 
             }
     });
+    
+    
 }
 
 
@@ -141,8 +153,22 @@ function displayMoreInfo(id) {
     document.getElementsByClassName("capacity")[0].innerHTML = locations[id][12];
     locations[id][8] === true ? document.getElementsByClassName("card-payments")[0].innerHTML = 'Yes' : document.getElementsByClassName("card-payments")[0].innerHTML = 'No';
     getGraph(locations[id][10]);
+    insertAvailableBikesForStation(locations[id][12]);
 }
 
+function insertAvailableBikesForStation(capacity)
+{
+    currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 2);
+    $.get("/prediction", { "dateTime": currentDate.toLocaleString(), "description": weatherData['description'], "rainBinary": weatherData['rainBinary'], "available_bike_stands": '31', "temperature":weatherData['temperature'] } )
+        .done(function(data){
+            console.log(new Date().toLocaleDateString());
+            $("#bikesInFuture").html("Available bikes in 2 hours: " + data);
+        }); 
+}
+
+function displayTable(){
+    
 function getGraph(stationId) {
    $("#graph").attr("src", '/graphing/ST' + stationId + '.png');
 }
@@ -165,7 +191,7 @@ function getMarker(x) {
     if (x > 10) {
         return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
     } else if (x >= 1 && x < 10) {
-        return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+        return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     } else {
         return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
     }

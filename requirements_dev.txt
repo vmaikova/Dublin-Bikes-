@@ -29,7 +29,7 @@ Flask-Philo==3.3.0
 idna==2.6
 ipython-genutils==0.2.0
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 jmespath==0.9.3
 json-encoder==0.4.4
 json-spec==0.10.1
